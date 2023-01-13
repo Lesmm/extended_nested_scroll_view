@@ -96,13 +96,17 @@ class _ExtendedNestedScrollCoordinator extends _NestedScrollCoordinator {
     // The implementation has to return the children in paint order skipping all
     // children that are not semantically relevant (e.g. because they are
     // invisible).
-    parent.visitChildrenForSemantics((RenderObject child) {
-      if (renderObject == child) {
-        visible = true;
-      } else {
-        visible = childIsVisible(child, renderObject);
-      }
-    });
+    try {
+      parent.visitChildrenForSemantics((RenderObject child) {
+        if (renderObject == child) {
+          visible = true;
+        } else {
+          visible = childIsVisible(child, renderObject);
+        }
+      });
+    } catch (e, s) {
+      // do nothing now ....
+    }
     return visible;
   }
 
